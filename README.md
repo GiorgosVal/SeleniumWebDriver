@@ -9,3 +9,23 @@ ChromeDriver 80.0.3987.106 was used (executable file inside the resources direct
 * Inside your test class use the ```System.setProperty("webdriver.chrome.driver", "resources/chromedriver");``` to set the system property for the Selenium to look for.
 * Create an instance of the WebDriver interface through it's implementing classes (ChromeDriver, EdgeDriver, EventFiringWebDriver, FirefoxDriver, InternetExplorerDriver, OperaWebDriver,
          RemoteWebDriver, SafariDriver).
+
+## Locating elements
+Since the WebDriver is instantiated, there are two methods for finding elements inside the web page:
+
+Method | Return type
+------ | -----------
+```findElement(By by)``` | ```WebElement```
+```findElements(By by)``` | ```List<WebElement>```
+
+The ```By``` class offers various ways to search for the element such as:
+* ```By.linkText(String linkText)```
+* ```By.tagName(String tagName)```
+* ```By.cssSelector(String cssSelector)```
+* ```By.id(String id)```
+* ```By.name(String name)```
+* ```By.xpath(String xpathExpression)```
+* ```By.partialLinkText(String partialLinkText)```
+
+### NoSuchElementException
+While searching for an element, there is always the possibility that this element does not exist. In such case the exception ```org.openqa.selenium.NoSuchElementException``` is thrown.
