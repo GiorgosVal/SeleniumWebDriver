@@ -1,8 +1,9 @@
 package base;
 
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.List;
 
 public class BaseTests {
 
@@ -33,6 +34,25 @@ public class BaseTests {
         //window.fullscreen();                                        // ...
         window.setSize(new Dimension(375, 812));       // iPhone X dimensions.
 
+        // The findElement method returns a single WebElement object. To locate the element we use the By class.
+        // If more than one such elements exist, the very first element inside the DOM it is returned.
+        WebElement inputsLink = webDriver.findElement(By.linkText("Inputs"));
+        inputsLink.click(); // since we have the element we can interact with it.
+
+        // The findElements method returns a List of WebElement objects.
+        List<WebElement> links = webDriver.findElements(By.tagName("a"));    // finds all elements which have links <a>
+        System.out.println(links.size());
+
+        // Seaarching for an element which does not exist throws a org.openqa.selenium.NoSuchElementException
+        String notExistingElement = "aNonExistingElement";
+        try {
+            webDriver.findElement(By.linkText(notExistingElement));
+        } catch (NoSuchElementException e) {
+            System.out.println("No element with text " + notExistingElement + " was found.");
+        }
+
+
+
         // Closes the browser BUT NOT the session.
         //webDriver.close();
         // Closes the browser AND the session.
@@ -40,7 +60,8 @@ public class BaseTests {
     }
 
     public static void main(String args[]) {
-        BaseTests baseTests = new BaseTests();
-        baseTests.setup();
+        Exercise1 exercise1 = new Exercise1();
+        exercise1.setup();
+        exercise1.getShiftingContent();
     }
 }
