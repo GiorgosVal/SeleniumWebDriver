@@ -27,6 +27,9 @@ The ```By``` class offers various ways to search for the element such as:
 * ```By.xpath(String xpathExpression)```
 * ```By.partialLinkText(String partialLinkText)```
 
+### NoSuchElementException
+While searching for an element, there is always the possibility that this element does not exist. In such case the exception ```org.openqa.selenium.NoSuchElementException``` is thrown.
+
 ## Interacting with elements
 Since we've got a WebElement, there are various methods to interact with it:
 
@@ -45,8 +48,6 @@ Method | Return type | Description
 ```isEnabled()``` | ```boolean``` | Returns ```true``` if the element is enabled.
 ```isSelected()``` | ```boolean``` | Returns ```true``` if the element is selected.
 
-### NoSuchElementException
-While searching for an element, there is always the possibility that this element does not exist. In such case the exception ```org.openqa.selenium.NoSuchElementException``` is thrown.
 
 ## The Page Object Model design pattern
 In test automation projects there are typically two layers: the **framework** layer and the **test** layer. The framework layer is all the coding that's done under the covers of the application (all the interactions with the web browser). The test layer is the actual tests that are executed.
