@@ -12,7 +12,7 @@ public class SecureAreaPage {
         this.driver = driver;
     }
 
-    private String getAlertText(){
+    public String getAlertText(){
         return this.driver.findElement(statusAlert).getText();
     }
 }

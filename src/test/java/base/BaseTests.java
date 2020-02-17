@@ -2,13 +2,16 @@ package base;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import pages.HomePage;
 
 public class BaseTests {
 
     private WebDriver driver;
-    private HomePage homePage;
+    protected HomePage homePage;
 
+    @BeforeClass
     public void setup(){
         System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
         driver = new ChromeDriver();
@@ -25,30 +28,10 @@ public class BaseTests {
         webDriver.close();                                          // Closes the browser BUT NOT the session.
         webDriver.quit();                                           // Closes the browser AND the session.
          */
+    }
 
+    @AfterClass
+    public void tearDown() {
         driver.quit();
     }
-
-    public static void main(String args[]) {
-        BaseTests baseTests = new BaseTests();
-        baseTests.setup();
-    }
 }
-
-
-/*
-The Page Object Model Pattern
-In test automation projects there are typically two layers: the framework layer and the test layer.
-The framework layer is all the coding that's done under the covers of the application (all the interactions with the web browser).
-The test layer is the actual tests that are executed.
-
-The way the Page Object Model design pattern works is that for every page of the application, a new class is created in the framework section of the project.
-For every element of the page that we want to interact with we create a private instance variable of type By and we instantiate it according to the By method that we want to use.
-To interact with the element we declare public methods. If the interaction results in browsing to a different page, then the method return type should be of the same type of the class that represents that page.
-
-
-
-
-
-
- */
