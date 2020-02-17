@@ -27,6 +27,24 @@ The ```By``` class offers various ways to search for the element such as:
 * ```By.xpath(String xpathExpression)```
 * ```By.partialLinkText(String partialLinkText)```
 
+## Interacting with elements
+Since we've got a WebElement, there are various methods to interact with it:
+
+Method | Return type | Description
+------ | ----------- | -----------
+```click()``` | ```void``` | Clicks the selected element (e.g. a submit button, a link, a checkbox, a radio button, etc).
+```sendKeys(CharSequence ... charSequence)``` | ```void``` | Writes a text inside an input field.
+```getTagName()``` | ```String``` | Gets the tag name of the element (e.g. for a ```<a>``` element it will return ```a```.
+```getText()``` | ```String``` | Returns the text that the element contains. e.g. In a ```<div>some text</div>``` it will return "some text".
+```getAttribute(String s)``` | ```String``` | Gets the value of the attribute described.
+```getCssValue(String s)``` | ```String``` | Gets the value of the css property described.
+```getSize()``` | ```Dimension``` | Returns a ```Dimension``` object that represents the dimensions of the element.
+```getLocation()``` | ```Point``` | Returns a ```Point``` object which represents the position of the element.
+```getRect()``` | ```Rectangle``` | Returns a ```Rectangle``` object which represents the dimensions of the element and also the (x,y) coordinates that the element starts in the browser.
+```isDisplayed()``` | ```boolean``` | Returns ```true``` if the element is displayed.
+```isEnabled()``` | ```boolean``` | Returns ```true``` if the element is enabled.
+```isSelected()``` | ```boolean``` | Returns ```true``` if the element is selected.
+
 ### NoSuchElementException
 While searching for an element, there is always the possibility that this element does not exist. In such case the exception ```org.openqa.selenium.NoSuchElementException``` is thrown.
 
