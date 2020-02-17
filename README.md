@@ -6,6 +6,7 @@ ChromeDriver 80.0.3987.106 was used (executable file inside the resources direct
 ## QuickStart
 * Download the ChromeDriver exec and unzip it inside the resourses directory.
 * Add the Maven [dependency](https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver) for Selenium Chrome Driver inside the ```pom.xml```.
+* Add the Maven [dependency](https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-support) for Selenium Support inside the ```pom.xml``` (Selenium Support offers classes such as ```Select``` which allows to select elements from dropdown menus, etc).
 * Inside your test class use the ```System.setProperty("webdriver.chrome.driver", "resources/chromedriver");``` to set the system property for the Selenium to look for.
 * Create an instance of the WebDriver interface through it's implementing classes (ChromeDriver, EdgeDriver, EventFiringWebDriver, FirefoxDriver, InternetExplorerDriver, OperaWebDriver,
          RemoteWebDriver, SafariDriver).
