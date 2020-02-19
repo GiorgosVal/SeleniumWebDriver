@@ -70,10 +70,13 @@ The ```By``` class offers various ways to search for the element such as:
 * ```By.xpath(String xpathExpression)```
 * ```By.partialLinkText(String partialLinkText)```
 
+**Notice that** the above two methods return the child element(s) of the parent element. So if the parent element is the driver, the methods will search all the DOM. If the parent element is another element, the methods will search only inside this element.
+
 ### NoSuchElementException
 While searching for an element, there is always the possibility that this element does not exist. In such case the exception ```org.openqa.selenium.NoSuchElementException``` is thrown.
 
 ## Interacting with elements
+### Basic interactions
 Since we've got a WebElement, there are various methods to interact with it:
 
 Method | Return type | Description
@@ -117,6 +120,24 @@ Method | Return type | Description
 ```deselectAll()``` | ```void``` |
  | |
 ```isMultiple()``` | ```boolean``` |
+
+### Advanced interactions
+To interact with elements with advanced interactions such as hovering, drag and drop, double clicking, click and wait, etc, Selenium provides the **```Actions```** class. The Actions class is instantiated by passing the WebDriver.
+```java
+Actions actions = new Actions(driver);
+```
+An Actions object offers plenty of methods for advanced interactions with the web elements.
+
+**Notice that** the Actions follows the builder pattern, meaning that **method chaining is possible**. When all chaining is completed, for the action to take effect we last chain the **```.perform()```** method (or else the .build() method which returns an Action object, and on it we call .perform()). e.g.:
+```java
+actions.moveToElement(figure).perform();
+```
+More methods
+
+Method | Return type | Description
+------ | ----------- | -----------
+// TODO | |
+
 
 ## Appendix A Example implementation of POM design pattern
 
