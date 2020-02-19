@@ -21,12 +21,6 @@ public class BaseTests {
 
         /*
         System.out.println(webDriver.getTitle());                   // Gets and prints the title of the web page.
-        WebDriver.Window window = webDriver.manage().window();      // Gets the window element of the web page.
-        window.maximize();                                          // Maximizes the window.
-        window.fullscreen();                                        // ...
-        window.setSize(new Dimension(375, 812));                    // iPhone X dimensions.
-        webDriver.close();                                          // Closes the browser BUT NOT the session.
-        webDriver.quit();                                           // Closes the browser AND the session.
          */
     }
 
