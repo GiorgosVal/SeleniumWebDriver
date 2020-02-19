@@ -102,7 +102,21 @@ The newly created object offers plenty of new methods to interact with it:
 
 Method | Return type | Description
 ------ | ----------- | -----------
-// TODO
+```getAllSelectedOptions()``` | ```List<WebElement>``` |
+```getFirstSelectedOption()``` | ```WebElement``` |
+```getOptions()``` | ```List<WebElement>``` |
+```getWrappedElement()``` | ```WebElement``` |
+ | |
+```selectByIndex()``` | ```void``` |
+```selectByValue()``` | ```void``` |
+```selectByVisibleText()``` | ```void``` |
+ | |
+```deselectByIndex()``` | ```void``` |
+```deselectByValue()``` | ```void``` |
+```deselectByVisibleText()``` | ```void``` |
+```deselectAll()``` | ```void``` |
+ | |
+```isMultiple()``` | ```boolean``` |
 
 ## Appendix A Example implementation of POM design pattern
 
