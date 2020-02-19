@@ -223,3 +223,13 @@ public class SecureAreaPage {
 [The Internet](https://the-internet.herokuapp.com/) - A website with all possible web elements for UI testing.
 
 [Formy](https://formy-project.herokuapp.com/) - Another websote for UI Testing with web elements especially used in forms.
+
+## Design patterns
+Below are listed some design patterns that are especially beneficial for test automation projects:
+- Page Object Model
+- Screenplay
+- Fluent
+- Builder
+- Singleton
+- Factory
+Facade
