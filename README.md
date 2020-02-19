@@ -18,6 +18,41 @@ The way the Page Object Model design pattern works is that for every page of the
 
 For an example implementation of the POM design pattern on a web site, please refer to the Appendix A.
 
+## Instantiation of the WebDriver
+The instantiation happens in two steps:
+- Setting the system property for the driver to look at the driver exe.
+- Instantiating the WebDriver interface through it's implementing classes, here ChromeDriver class (other classes are EdgeDriver, EventFiringWebDriver, FirefoxDriver, InternetExplorerDriver, OperaWebDriver, RemoteWebDriver, SafariDriver).
+```java
+System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
+WebDriver driver = new ChromeDriver();
+```
+## Opening and closing the WebDriver
+Opening and closing the browser is easy through the following methods.
+
+Method | Return type | Description
+------ | ----------- | -----------
+```get(String url)``` | ```void``` | Opens the browser to the specified url
+```close()``` | ```void``` | Closes the browser **but not*** the session
+```quit()``` | ```void``` | Closes the browser **and** the session
+
+## Geting and handling the Window
+Since we open the browser, we can get info about the window, or set it's dimensions:
+
+```java
+Window window  = driver.manage().window();
+```
+The Window object has the following methods:
+
+Method | Return type | Description
+------ | ----------- | -----------
+```maximize()``` | ```void``` | Maximizes the window.
+```fullscreen()``` | ```void```| Sets the window to full screen.
+```setSize(Dimension dimension)``` | ```void``` | Sets the dimensions of the window. It accepts a Dimension object which represents the with and hight in pixels. e.g. ```window.setSize(new Dimension(375, 812))``` (iPhone X dimensions)
+```getSize()``` | ```Dimension``` | Gets the dimensions of the window
+```setPosition(Point point)``` | ```void``` | Sets the position of the window relatively to the upper left corner of the browser. Accepts a Point object which holds the x, y coordinates. e.g. ```window().setPosition(new Point(100, 400))```
+```getPosition()``` | ```Point``` | Gets the position of the window
+
+
 ## Locating elements
 Since the WebDriver is instantiated, there are two methods for finding elements inside the web page:
 
@@ -147,3 +182,9 @@ public class SecureAreaPage {
     }
 }
 ```
+## Cool Sites
+[Test Automation University](https://testautomationu.applitools.com/) - Free Test Automation courses
+
+[The Internet](https://the-internet.herokuapp.com/) - A website with all possible web elements for UI testing.
+
+[Formy](https://formy-project.herokuapp.com/) - Another websote for UI Testing with web elements especially used in forms.
