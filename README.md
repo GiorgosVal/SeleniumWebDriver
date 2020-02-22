@@ -192,7 +192,19 @@ The above will type 'P some string'.
 
 The above will type 'P some strinG'.
 
+### Interacting with JavaScript alerts
+JavaScipt alerts are not part of the DOM, and this means that they cannot be located directly using the `By` class. To locate and interact with JS alerts we use the `switchTo()` method of the `WebDriver` which returns a `TargetLocator`. On the `TargetLocator` object we use the `alert()` method which returns an `Alert` object.
+```java
+Alert alert = this.driver.switchTo().alert();
+```
+The `Alert` class offers the following methods to interact with the alert object:
 
+Method | Return type | Description
+------ | ----------- | -----------
+`accept()` | `void` | Clicks on the OK button of the alert.
+`dismiss()`| `void` | Clicks the Cancel button of the alert.
+`sendKeys(String s)` | `void` | Writes text to the input field of the alert.
+`getText()` | `String` | Returns the text of the alert.
 
 ## Appendix A Example implementation of POM design pattern
 
