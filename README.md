@@ -136,8 +136,86 @@ More methods
 
 Method | Return type | Description
 ------ | ----------- | -----------
-// TODO | |
+```moveToElement(WebElement target)``` | ```Actions``` |
+```moveToElement(WebElement target, int xOffset, int yOffset)``` | ```Actions``` |
+```moveByOffset(int xOffset, int yOffset)``` | ```Actions``` |
+```dragAndDrop(WebElement source, WebElement target)``` | ```Actions``` |
+```dragAndDropBy(WebElement source, int xOffset, int yOffset)``` | ```Actions``` |
+ | |
+```click()``` | ```Actions``` |
+```click(WebElement target)``` | ```Actions``` |
+```doubleClick()``` | ```Actions``` |
+```doubleClick(WebElement target)``` | ```Actions``` |
+```contextClick()``` | ```Actions``` |
+```contextClick(WebElement target)``` | ```Actions``` |
+```clickAndHold()``` | ```Actions``` |
+```clickAndHold(WebElement target)``` | ```Actions``` |
+```release()``` | ```Actions``` |
+```release(WebElement target)``` | ```Actions``` |
+```pause(long pause)``` | ```Actions``` |
+```pause(Duration duration)``` | ```Actions``` |
+```tick(Action action)``` | ```Actions``` |
+```tick(Interaction... actions)``` | ```Actions``` |
+ | | 
+```keyDown(CharSequence key)``` | ```Actions``` |
+```keyDown(WebElement target, CharSequence key)``` | ```Actions``` |
+```keyUp(CharSequence key)``` | ```Actions``` |
+```keyUp(WebElement target, CharSequence key)``` | ```Actions``` |
+```sendKeys(CharSequence... key)``` | ```Actions``` |
+```sendKeys(WebElement target, CharSequence... key)``` | ```Actions``` |
+ | |
+```perform()``` | ```void``` |
+```build()``` | ```Action``` |
 
+### Writing text
+Both `WebElement` class and `Actions` class offer the `sendKeys(CharSequence ... charSequence)` method for writing text in input fields. This method ofcourse can accept any `String`, but Selenium WebDriver comes with a special [`enum Keys`](https://www.selenium.dev/selenium/docs/api/java/org/openqa/selenium/Keys.html) which offers some out-of-the-box functionality for pressing keys such as ALT, BACK_SPACE, SHIFT, F1, NUMPAD0, etc. The `Keys enum` implements `java.lang.CharSequence` so it can be passed as an argument in the `sendKeys()` method.
+
+A very usefull feature of `Keys enum` is the method `chord(CharSequence ... charSequence)` with a return type of `String` which allows to combine keys, like SHIFT+p, etc. Some valid examples:
+
+`sendKeys("a string");`
+
+The above will type 'a string'.
+
+`sendKeys("some other string", Keys.BACK_SPACE);`
+
+The above will type 'a string' and press the back space button which will erase the 'g'.
+
+`sendKeys(Keys.chord(Keys.SHIFT, "p"));`
+
+The above will type combine the keys SHIFT and 'p' to write an 'P'.
+
+`sendKeys(Keys.chord(Keys.SHIFT, "p") + " some string");`
+
+The above will type 'P some string'.
+
+`sendKeys(Keys.chord(Keys.SHIFT, "p"), " some string", Keys.BACK_SPACE, Keys.chord(Keys.SHIFT, "g"));`
+
+The above will type 'P some strinG'.
+
+### Interacting with JavaScript alerts
+JavaScipt alerts are not part of the DOM, and this means that they cannot be located directly using the `By` class. To locate and interact with JS alerts we use the `switchTo()` method of the `WebDriver` which returns a `TargetLocator`. On the `TargetLocator` object we use the `alert()` method which returns an `Alert` object.
+```java
+Alert alert = this.driver.switchTo().alert();
+```
+The `Alert` class offers the following methods to interact with the alert object:
+
+Method | Return type | Description
+------ | ----------- | -----------
+`accept()` | `void` | Clicks on the OK button of the alert.
+`dismiss()`| `void` | Clicks the Cancel button of the alert.
+`sendKeys(String s)` | `void` | Writes text to the input field of the alert.
+`getText()` | `String` | Returns the text of the alert.
+
+### Interacting with FileUploads
+File upload input elements open a window to choose a file to e uploaded. This window is part of the OS, and not of the DOM, so it is impossible to interact with it. To solve this issue, we skip this step by sending directy the absolute path of the file we want to upload to the input field.
+```java
+driver.findElement(inputField).sendKeys("abslute/path/of/file/myfile.txt");
+```
+
+### Interacting with Modals
+Unlike alerts, modals are part of the DOM, and this means that as long as a modal is visible, it is possible to locate it and interact with it.
+
+**Notice that** when a modal is visible, it is impossible to interact with anything on the page besides the modal. Attempting to do so will throw an exception.
 
 ## Appendix A Example implementation of POM design pattern
 
