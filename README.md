@@ -136,8 +136,36 @@ More methods
 
 Method | Return type | Description
 ------ | ----------- | -----------
-// TODO | |
-
+```moveToElement(WebElement target)``` | ```Actions``` |
+```moveToElement(WebElement target, int xOffset, int yOffset)``` | ```Actions``` |
+```moveByOffset(int xOffset, int yOffset)``` | ```Actions``` |
+```dragAndDrop(WebElement source, WebElement target)``` | ```Actions``` |
+```dragAndDropBy(WebElement source, int xOffset, int yOffset)``` | ```Actions``` |
+ | |
+```click()``` | ```Actions``` |
+```click(WebElement target)``` | ```Actions``` |
+```doubleClick()``` | ```Actions``` |
+```doubleClick(WebElement target)``` | ```Actions``` |
+```contextClick()``` | ```Actions``` |
+```contextClick(WebElement target)``` | ```Actions``` |
+```clickAndHold()``` | ```Actions``` |
+```clickAndHold(WebElement target)``` | ```Actions``` |
+```release()``` | ```Actions``` |
+```release(WebElement target)``` | ```Actions``` |
+```pause(long pause)``` | ```Actions``` |
+```pause(Duration duration)``` | ```Actions``` |
+```tick(Action action)``` | ```Actions``` |
+```tick(Interaction... actions)``` | ```Actions``` |
+ | | 
+```keyDown(CharSequence key)``` | ```Actions``` |
+```keyDown(WebElement target, CharSequence key)``` | ```Actions``` |
+```keyUp(CharSequence key)``` | ```Actions``` |
+```keyUp(WebElement target, CharSequence key)``` | ```Actions``` |
+```sendKeys(CharSequence... key)``` | ```Actions``` |
+```sendKeys(WebElement target, CharSequence... key)``` | ```Actions``` |
+ | |
+```perform()``` | ```void``` |
+```build()``` | ```Action``` |
 
 ## Appendix A Example implementation of POM design pattern
 
