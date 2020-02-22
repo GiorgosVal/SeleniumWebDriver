@@ -7,6 +7,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pages.HomePage;
 
+import java.util.concurrent.TimeUnit;
+
 public class BaseTests {
 
     private WebDriver driver;
@@ -17,7 +19,6 @@ public class BaseTests {
         System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
         driver = new ChromeDriver();
         goHome();
-        homePage = new HomePage(driver);
         /*
         System.out.println(webDriver.getTitle());                   // Gets and prints the title of the web page.
          */
@@ -26,6 +27,7 @@ public class BaseTests {
     @BeforeMethod
     public void goHome() {
         driver.get("https://the-internet.herokuapp.com/");
+        homePage = new HomePage(driver);
     }
 
 
