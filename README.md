@@ -217,6 +217,20 @@ Unlike alerts, modals are part of the DOM, and this means that as long as a moda
 
 **Notice that** when a modal is visible, it is impossible to interact with anything on the page besides the modal. Attempting to do so will throw an exception.
 
+### Interacing with iframes
+Iframes are pages inside a page, so in order to interact with an iframe the WebDriver must first switch to this page. As long as this happens, we can interact with the iframe just like any other page. To switch to an iframe and switch back to parent Selenium WebDriver offers the following methods:
+
+Method | Return type | Description
+------ | ----------- | -----------
+`switchTo().frame(String id)` | `WebDriver` | Selects the iframe by id
+`switchTo().frame(WebElement target)` | `WebDriver` | Select the iframe by a WebElement
+`switchTo().frame(int i)` | `WebDriver` | Selects the iframe by it's index (in case of multiple iframes). It is zero-based.
+`switchTo().parentFrame()` | `void` | Switches back to the parent frame.
+
+**Good practice tip 1:** In each interaction method with an iframe make sure you switch back to the parent frame. This way each interaction will always start from the parent element, and we avoid the possibility of NoSuchElementException.
+
+**Good practice tip 2:** Consider returning a new Page class for each nested iframe (according to the POM design pattern).
+
 ## Appendix A Example implementation of POM design pattern
 
 The HomePage class
