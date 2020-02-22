@@ -40,6 +40,31 @@ public class HomePage {
         return new HorizontalSliderPage(this.driver);
     }
 
+    public AlertsPage clickJavaScriptAlerts() {
+        clickLink("JavaScript Alerts");
+        return new AlertsPage(this.driver);
+    }
+
+    public FileUploadPage clickFileUpload() {
+        clickLink("File Upload");
+        return new FileUploadPage(this.driver);
+    }
+
+    public ContextMenuPage clickContextMenu() {
+        clickLink("Context Menu");
+        return new ContextMenuPage(this.driver);
+    }
+
+    public WysizygEditorPage clickWysizygEditor() {
+        clickLink("WYSIWYG Editor");
+        return new WysizygEditorPage(this.driver);
+    }
+
+    public NestedFramesPage clickNestedFrames() {
+        clickLink("Nested Frames");
+        return new NestedFramesPage(this.driver);
+    }
+
     private void clickLink(String linkText) {
         this.driver.findElement(By.linkText(linkText)).click();
     }
