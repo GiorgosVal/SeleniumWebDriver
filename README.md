@@ -206,6 +206,17 @@ Method | Return type | Description
 `sendKeys(String s)` | `void` | Writes text to the input field of the alert.
 `getText()` | `String` | Returns the text of the alert.
 
+### Interacting with FileUploads
+File upload input elements open a window to choose a file to e uploaded. This window is part of the OS, and not of the DOM, so it is impossible to interact with it. To solve this issue, we skip this step by sending directy the absolute path of the file we want to upload to the input field.
+```java
+driver.findElement(inputField).sendKeys("abslute/path/of/file/myfile.txt");
+```
+
+### Interacting with Modals
+Unlike alerts, modals are part of the DOM, and this means that as long as a modal is visible, it is possible to locate it and interact with it.
+
+**Notice that** when a modal is visible, it is impossible to interact with anything on the page besides the modal. Attempting to do so will throw an exception.
+
 ## Appendix A Example implementation of POM design pattern
 
 The HomePage class
