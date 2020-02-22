@@ -167,6 +167,33 @@ Method | Return type | Description
 ```perform()``` | ```void``` |
 ```build()``` | ```Action``` |
 
+### Writing text
+Both `WebElement` class and `Actions` class offer the `sendKeys(CharSequence ... charSequence)` method for writing text in input fields. This method ofcourse can accept any `String`, but Selenium WebDriver comes with a special [`enum Keys`](https://www.selenium.dev/selenium/docs/api/java/org/openqa/selenium/Keys.html) which offers some out-of-the-box functionality for pressing keys such as ALT, BACK_SPACE, SHIFT, F1, NUMPAD0, etc. The `Keys enum` implements `java.lang.CharSequence` so it can be passed as an argument in the `sendKeys()` method.
+
+A very usefull feature of `Keys enum` is the method `chord(CharSequence ... charSequence)` with a return type of `String` which allows to combine keys, like SHIFT+p, etc. Some valid examples:
+
+`sendKeys("a string");`
+
+The above will type 'a string'.
+
+`sendKeys("some other string", Keys.BACK_SPACE);`
+
+The above will type 'a string' and press the back space button which will erase the 'g'.
+
+`sendKeys(Keys.chord(Keys.SHIFT, "p"));`
+
+The above will type combine the keys SHIFT and 'p' to write an 'P'.
+
+`sendKeys(Keys.chord(Keys.SHIFT, "p") + " some string");`
+
+The above will type 'P some string'.
+
+`sendKeys(Keys.chord(Keys.SHIFT, "p"), " some string", Keys.BACK_SPACE, Keys.chord(Keys.SHIFT, "g"));`
+
+The above will type 'P some strinG'.
+
+
+
 ## Appendix A Example implementation of POM design pattern
 
 The HomePage class
