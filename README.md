@@ -275,6 +275,21 @@ FluentWait wait = new FluentWait(driver)
 wait.until(ExpectedConditions.invisibilityOf(webElement));
 ```
 
+## Using JavaScript
+Selenium WebDriver provides a way to allow the execution of JavaScript in the browser. To do this, simply cast the `WebDriver` to a `JavascriptExecutor` class and use the method `executeScript(String script, Object... objects)` or the method `executeAsyncScript(String script, Object... objects)`.
+
+Assuming that there is an element with id 'dropdown', then the following two examples are equivalent:
+```java
+String script = "document.querySelector('#dropdown').setAttribute('multiple', '')";
+((JavascriptExecutor)driver).executeScript(script);
+```
+```java
+Select dropdown = new Select(this.driver.findElement(By.id("dropdown")));
+String script = "arguments[0].setAttribute('multiple', '')";
+((JavascriptExecutor)driver).executeScript(script, dropdown);
+// With arguments[0] we refer to the 1st Object that is passed as an argument inside the executeScript() method.
+```
+
 
 
 ## Appendix A Example implementation of POM design pattern
