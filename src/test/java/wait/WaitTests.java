@@ -22,5 +22,4 @@ public class WaitTests extends BaseTests {
         dynamicLoadingExample2Page.clickStart();
         assertEquals(dynamicLoadingExample2Page.getLoadedText(),"Hello World!", "Loaded text incorrect");
     }
-
 }
