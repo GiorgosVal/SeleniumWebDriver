@@ -65,6 +65,11 @@ public class HomePage {
         return new NestedFramesPage(this.driver);
     }
 
+    public DynamicLoadPage clickDynamicLoad() {
+        clickLink("Dynamic Loading");
+        return new DynamicLoadPage(this.driver);
+    }
+
     private void clickLink(String linkText) {
         this.driver.findElement(By.linkText(linkText)).click();
     }

@@ -18,6 +18,9 @@ public class BaseTests {
     public void setup(){
         System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
         driver = new ChromeDriver();
+        //driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);   // how much time to wait for the page to load
+        //driver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);  // how much time to wait for asynchronous scripts
+        //driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         goHome();
         /*
         System.out.println(webDriver.getTitle());                   // Gets and prints the title of the web page.
