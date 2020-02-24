@@ -217,7 +217,7 @@ Unlike alerts, modals are part of the DOM, and this means that as long as a moda
 
 **Notice that** when a modal is visible, it is impossible to interact with anything on the page besides the modal. Attempting to do so will throw an exception.
 
-### Interacing with iframes
+### Interacting with iframes
 Iframes are pages inside a page, so in order to interact with an iframe the WebDriver must first switch to this page. As long as this happens, we can interact with the iframe just like any other page. To switch to an iframe and switch back to parent Selenium WebDriver offers the following methods:
 
 Method | Return type | Description
@@ -230,6 +230,52 @@ Method | Return type | Description
 **Good practice tip 1:** In each interaction method with an iframe make sure you switch back to the parent frame. This way each interaction will always start from the parent element, and we avoid the possibility of NoSuchElementException.
 
 **Good practice tip 2:** Consider returning a new Page class for each nested iframe (according to the POM design pattern).
+
+## Wait Strategies
+When it is about interacting with elements that may delay to load, or load dynamically, Selenium WebDriver offers three wait strategies, a) implicit wait, b) explicit wait with `WebDriverWait` class and c) explicit wait with `FluentWait` class.
+
+### Implicit wait
+Implicit wait is applied to all the elements of the page, in every interaction. Every time the WebDriver needs to interract with any element and the element is not available, then the driver will wait for up to a specified time. If the specified time passes, then an exception is thrown. It is recommended to use when the elements are located with the time frame specified in implicit wait.
+
+Examples:
+```java
+driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+// Will wait for up to 30 seconds in each interaction
+driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+// Will wait for up to 5 seconds until a page loads
+driver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);
+// Will wait for up to 5 seconds for asynchronous scripts
+```
+
+### Explicit Waits
+Explicit waits offer more flexibility as they are applied to specific elements and are recommended to use when the elements are taking long time to load and we also want to verify a property of the element (e.g. it's visibility).
+
+#### With WebDriverWait class
+With the WebDriverWait class it is possible to specify the wait timeout and the expected conditions that should be met in order for the WebDriver to proceed with an element. For example, to wait for 5 seconds until an element disappears (if the element disappears within 5 seconds the WebDriver proceeds, or else an exception is thrown).
+
+Example:
+
+```java
+WebDriverWait wait = new WebDriverWait(driver, 5);
+// where 5 is the timeout in seconds
+
+wait.until(ExpectedConditions.invisibilityOf(webElement));
+```
+#### With FluentWait class
+It is even more flexible than the WebDriverWait class, allowing also to specify how ofter the WebDriver should try to poll for the element, and what exceptions should ignore during this.
+
+Example:
+
+```java
+FluentWait wait = new FluentWait(driver)
+         .withTimeout(Duration.ofSeconds(5))
+         .pollingEvery(Duration.ofSeconds(1))
+         .ignoring(NoSuchElementException.class);
+
+wait.until(ExpectedConditions.invisibilityOf(webElement));
+```
+
+
 
 ## Appendix A Example implementation of POM design pattern
 
