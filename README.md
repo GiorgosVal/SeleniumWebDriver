@@ -290,6 +290,36 @@ String script = "arguments[0].setAttribute('multiple', '')";
 // With arguments[0] we refer to the 1st Object that is passed as an argument inside the executeScript() method.
 ```
 
+## Navigation
+
+### Back, Forward, Refresh, Go to url
+Through `WebDriver` class we can access the `Navigation` class with `driver.navigate()` which offers the following methods for navigating back and forth or to another location:
+
+Method | Return type | Description
+------ | ----------- | -----------
+`back()` | `void` |
+`forward()` | `void` |
+`refresh()` | `void` |
+`to(String url)` | `void` |
+`to(Url url)` | `void` |
+
+**Notice that** `driver.get(String url)` and `driver.navigate().to(String url)` are different in that the `get()` method waits for the page to load while the `to()` method does not.
+
+### Switch to window or tab
+Selenium WebDriver provides the already open windows or tabs in a Set of Strings:
+
+```java
+Set<String> windows = this.driver.getWindowHandles();
+```
+Each window String of the above set will be like this: `CDwindow-14FF467D2FAB379F0B652FC0B522853D`, with the hash number to be **non deterministic** (in every run it will differ).
+
+In order to switch to a specific window, the above window String must be passed to the following method:
+
+```java
+driver.switchTo().window(window);
+```
+But since the window string is non deterministic, how do we know in which window to switch to? Literally, we don't. The only option is that we iterate through the entire `Set<String> windows` and for every `window` we will switch the driver to this window. The `driver.getTitle()` method in every switch will return the name of the current window. Thus, the breaking condition is that the current window value must be equal with a predefined value (`tabTitle.equals(this.driver.getTitle())`).
+
 
 
 ## Appendix A Example implementation of POM design pattern
