@@ -387,6 +387,36 @@ driver.register(new EventReporter());
 ```
 In this way, the `EventFiringWebDriver` will trigger events and notify (invoke methods of) the `EventReporter` class.
 
+## Managing the browser
+Selenium offers the `ChromeOptions` class that allows us to make changes to the browser instance that is launched. For example:
+* We can `addArguments(String arg)` ~~such as `disable-infobars` if we want the info bar not to be visible~~ (disabled by GoogleChrome), and other [arguments](https://peter.sh/experiments/chromium-command-line-switches/)
+* We can `setHeadless(Boolean boolean)` if we want our tests to run in the background without opening an instance of the browser (this offers faster execution).
+* We can `setBinary(File file)` of the browser if we want to use a different binary
+* and many more...
+
+## Cookies
+Selenium offers the `Cookie` class if we want to build a cookie. To send/get a cookie we can use the `Options` class (`driver.manage()`) and from `Options` class we have many options:
+
+Method | Return type | Description
+------ | ----------- | -----------
+`addCookie(Cookie cookie)` | `void` |
+`getCookieNamed(String name)` | `void` |
+`getCookies()` | `Set<Cookie>` |
+`deleteCookie(Cookie cookie)` | `void` |
+`deleteCookieNamed(String name)` | `void` |
+`deleteAllCookies()` | `void` |
+
+To build a cookie it's easy:
+```java
+Cookie cookie new Cookie.Builder(String name, String value)
+                .domain(String host)
+                .expiresOn(Date expiry)
+                .path(String path)
+                .isSecure(boolean secure)
+                .isHttpOnly(boolean httpOnly)
+                .build();
+```
+
 
 ## Appendix A Example implementation of POM design pattern
 
