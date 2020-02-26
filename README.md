@@ -354,6 +354,38 @@ public void takeScreenshot(ITestResult result) {
 }
 ```
 
+## Event Listeners
+Selenium offers an interface called `WebDriverEventListener`, which provides methods that will listen for Selenium events and allows us to add additional functionality when those events occur. To implement this interface simply we make a class that implements it, like:
+```java
+public class EventReporter implements WebDriverEventListener {
+    // implementing all interface methods
+}
+```
+This is our Listener, or else our *Observer*, so according to the Observer Design Pattern, we need to register it to some sort of *Subject*. The *Subject* in our case is the driver, not the `WebDriver` but the `EventFiringWebDriver` class.
+
+The `EventFiringWebDriver` class is a more powerfull version of `WebDriver` which offers more capabilities as it `implements WebDriver, JavascriptExecutor, TakesScreenshot, WrapsDriver, HasInputDevices, HasTouchScreen, Interactive, HasCapabilities`.
+
+If we look the source code of `EventFiringWebDriver` we see that it is indeed implementing the Observer Design Pattern:
+```java
+// Selenium WebDriver source code
+private final List<WebDriverEventListener> eventListeners = new ArrayList();
+...
+public EventFiringWebDriver register(WebDriverEventListener eventListener) {...}
+...
+public EventFiringWebDriver unregister(WebDriverEventListener eventListener) {...}
+```
+
+So instead of instantiating the WebDriver like,
+```java
+WebDriver driver = new ChromeDriver();
+```
+we can do this like below, while registering a Listener:
+
+```java
+EventFiringWebDriver driver = new EventFiringWebDriver(new ChromeDriver());
+driver.register(new EventReporter());
+```
+In this way, the `EventFiringWebDriver` will trigger events and notify (invoke methods of) the `EventReporter` class.
 
 
 ## Appendix A Example implementation of POM design pattern
