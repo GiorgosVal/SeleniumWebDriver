@@ -321,6 +321,40 @@ driver.switchTo().window(window);
 But since the window string is non deterministic, how do we know in which window to switch to? Literally, we don't. The only option is that we iterate through the entire `Set<String> windows` and for every `window` we will switch the driver to this window. The `driver.getTitle()` method in every switch will return the name of the current window. Thus, the breaking condition is that the current window value must be equal with a predefined value (`tabTitle.equals(this.driver.getTitle())`).
 
 
+## Taking screenshots
+### General
+To take screenshots Selenium offers the interface `TakeScreenshot` in which the `WebDriver` object need to be cast to. After casting, the "camera" object has only one method `getScreenshotAs(OutputType<X> outputType)`. For example:
+
+```java
+TakesScreenshot camera = (TakesScreenshot)driver;
+File screenshot = camera.getScreenshotAs(OutputType.FILE);     // saves it as java.io.File
+```
+The newly created screenshot file wll be stored in some directory which can be found with `screenshot.getAbsolutePath()`. To move the file to another directory (e.g. a sub directory inside our resources derectory) we can use the `com.google.common.io.Files.move(File from, File to)` method. For example:
+
+```java
+Files.move(screenshot, new File("resources/screenshots/" + result.getInstanceName() + "." + result.getName() + ".png"));
+```
+The above line will move the file to the directory `resources/screenshots/` and also rename it to be like `package.TestClass.TestMethod.png`.
+
+### After each failed test
+To take a screenshot after each failed test, we can use the `org.testng.ITestResult` interface and pass it as a parameter in a `@AfterMethod`. With the result object we can check if the `result.getStatus()` is equal to `ITestResult.FAILURE` and if this is true, to take a screenshot. For example:
+
+```java
+@AfterMethod
+public void takeScreenshot(ITestResult result) {
+    if(ITestResult.FAILURE == result.getStatus()) {
+        TakesScreenshot camera = (TakesScreenshot)driver;
+        File screenshot = camera.getScreenshotAs(OutputType.FILE);
+        try {
+            Files.move(screenshot, new File("resources/screenshots/" + result.getInstanceName() + "." + result.getName() + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+
 
 ## Appendix A Example implementation of POM design pattern
 
