@@ -1,5 +1,6 @@
-* [Selenium Web Driver](#selenium-web-driver)
-* [QuickStart](#quickstart)
+# [Selenium Web Driver](#selenium-web-driver)
+## [QuickStart](#quickstart)
+## [The Page Object Model design pattern](#the-page-object-model-design-pattern)
 
 # Selenium Web Driver
 This repo was created during the [course](https://testautomationu.applitools.com/selenium-webdriver-tutorial-java/) of [Test Automation University](https://testautomationu.applitools.com/) about the Selenium Web Driver and it is used to note the very first steps for using this framework.
