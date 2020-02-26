@@ -1,35 +1,38 @@
-[Selenium Web Driver](#selenium-web-driver)</br>
-[QuickStart](#quickstart)
-[The Page Object Model design pattern](#the-page-object-model-design-pattern)</br>
-[Instantiation of the WebDriver](#instantiation-of-the-webdriver)</br>
-[Opening and closing the WebDriver](#opening-and-closing-the-webdriver)</br>
-[Geting and handling the Window](#geting-and-handling-the-window)</br>
-[Locating elements](#locating-elements)</br>
-[Locating elements - NoSuchElementException](#nosuchelementexception)</br>
-[Interacting with elements - Basic interactions](#basic-interactions)</br>
-[Interacting with elements - Interacting with Dropdown elements](#interacting-with-dropdown-elements)</br>
-[Interacting with elements - Advanced interactions](#advanced-interactions)</br>
-[Interacting with elements - Writing text](#writing-text)</br>
-[Interacting with elements - Interacting with JavaScript alerts](#interacting-with-javascript-alerts)</br>
-[Interacting with elements - Interacting with FileUploads](#interacting-with-fileuploads)</br>
-[Interacting with elements - Interacting with Modals](#interacting-with-modals)</br>
-[Interacting with elements - Interacting with iframes](#interacting-with-iframes)</br>
-[Wait Strategies](#wait-strategies)</br>
-[Wait Strategies - Implicit wait](#implicit-wait)</br>
-[Wait Strategies - Explicit Waits](#explicit-waits)</br>
-[Wait Strategies - Explicit Waits - With WebDriverWait class](#with-webdriverwait-class)</br>
-[Wait Strategies - Explicit Waits - With FluentWait class](#with-fluentwait-class)</br>
-[Using JavaScript](#using-javascript)</br>
-[Navigation - Back, Forward, Refresh, Go to url](#back-forward-refresh-go-to-url)</br>
-[Navigation - Switch to window or tab](#switch-to-window-or-tab)</br>
-[Taking Screenshots - General](#general)</br>
-[Taking Screenshots - After each failed test](#after-each-failed-test)</br>
-[Event Listeners](#event-listeners)</br>
-[Managing the browser](#managing-the-browser)</br>
-[Cookies](#cookies)</br>
-[Appendix A Example implementation of POM design pattern](#appendix-a-example-implementation-of-pom-design-pattern)</br>
-[Cool Sites](#cool-sites)</br>
-[Design patterns](#design-patterns)</br>
+- [Selenium Web Driver](#selenium-web-driver)
+  * [QuickStart](#quickstart)
+  * [The Page Object Model design pattern](#the-page-object-model-design-pattern)
+  * [Instantiation of the WebDriver](#instantiation-of-the-webdriver)
+  * [Opening and closing the WebDriver](#opening-and-closing-the-webdriver)
+  * [Geting and handling the Window](#geting-and-handling-the-window)
+  * [Locating elements](#locating-elements)
+    + [NoSuchElementException](#nosuchelementexception)
+  * [Interacting with elements](#interacting-with-elements)
+    + [Basic interactions](#basic-interactions)
+    + [Interacting with Dropdown elements](#interacting-with-dropdown-elements)
+    + [Advanced interactions](#advanced-interactions)
+    + [Writing text](#writing-text)
+    + [Interacting with JavaScript alerts](#interacting-with-javascript-alerts)
+    + [Interacting with FileUploads](#interacting-with-fileuploads)
+    + [Interacting with Modals](#interacting-with-modals)
+    + [Interacting with iframes](#interacting-with-iframes)
+  * [Wait Strategies](#wait-strategies)
+    + [Implicit wait](#implicit-wait)
+    + [Explicit Waits](#explicit-waits)
+      - [With WebDriverWait class](#with-webdriverwait-class)
+      - [With FluentWait class](#with-fluentwait-class)
+  * [Using JavaScript](#using-javascript)
+  * [Navigation](#navigation)
+    + [Back, Forward, Refresh, Go to url](#back-forward-refresh-go-to-url)
+    + [Switch to window or tab](#switch-to-window-or-tab)
+  * [Taking screenshots](#taking-screenshots)
+    + [General](#general)
+    + [After each failed test](#after-each-failed-test)
+  * [Event Listeners](#event-listeners)
+  * [Managing the browser](#managing-the-browser)
+  * [Cookies](#cookies)
+  * [Appendix A Example implementation of POM design pattern](#appendix-a-example-implementation-of-pom-design-pattern)
+  * [Cool Sites](#cool-sites)
+  * [Design patterns](#design-patterns)
 
 # Selenium Web Driver
 This repo was created during the [course](https://testautomationu.applitools.com/selenium-webdriver-tutorial-java/) of [Test Automation University](https://testautomationu.applitools.com/) about the Selenium Web Driver and it is used to note the very first steps for using this framework.
