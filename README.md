@@ -1,45 +1,49 @@
-- [Selenium Web Driver](#selenium-web-driver)
-  * [QuickStart](#quickstart)
-  * [The Page Object Model design pattern](#the-page-object-model-design-pattern)
-  * [Instantiation of the WebDriver](#instantiation-of-the-webdriver)
-  * [Opening and closing the WebDriver](#opening-and-closing-the-webdriver)
-  * [Geting and handling the Window](#geting-and-handling-the-window)
-  * [Locating elements](#locating-elements)
-    + [NoSuchElementException](#nosuchelementexception)
-  * [Interacting with elements](#interacting-with-elements)
-    + [Basic interactions](#basic-interactions)
-    + [Interacting with Dropdown elements](#interacting-with-dropdown-elements)
-    + [Advanced interactions](#advanced-interactions)
-    + [Writing text](#writing-text)
-    + [Interacting with JavaScript alerts](#interacting-with-javascript-alerts)
-    + [Interacting with FileUploads](#interacting-with-fileuploads)
-    + [Interacting with Modals](#interacting-with-modals)
-    + [Interacting with iframes](#interacting-with-iframes)
-  * [Wait Strategies](#wait-strategies)
-    + [Implicit wait](#implicit-wait)
-    + [Explicit Waits](#explicit-waits)
-      - [With WebDriverWait class](#with-webdriverwait-class)
-      - [With FluentWait class](#with-fluentwait-class)
-  * [Using JavaScript](#using-javascript)
-  * [Navigation](#navigation)
-    + [Back, Forward, Refresh, Go to url](#back-forward-refresh-go-to-url)
-    + [Switch to window or tab](#switch-to-window-or-tab)
-  * [Taking screenshots](#taking-screenshots)
-    + [General](#general)
-    + [After each failed test](#after-each-failed-test)
-  * [Event Listeners](#event-listeners)
-  * [Managing the browser](#managing-the-browser)
-  * [Cookies](#cookies)
-  * [Appendix A Example implementation of POM design pattern](#appendix-a-example-implementation-of-pom-design-pattern)
-  * [Cool Sites](#cool-sites)
-  * [Design patterns](#design-patterns)
 
-# Selenium Web Driver
+# About
 This repo was created during the [course](https://testautomationu.applitools.com/selenium-webdriver-tutorial-java/) of [Test Automation University](https://testautomationu.applitools.com/) about the Selenium Web Driver and it is used to note the very first steps for using this framework.
 
 ChromeDriver 80.0.3987.106 was used (executable file inside the resources directory). To find out which version should be used a) check the current version of Google Chrome b) download the according executable file from [ChromeDriver downloads](https://chromedriver.chromium.org/downloads).
 
-## QuickStart
+# Table of Contents
+
+- [About](#about)
+- [Table of Contents](#table-of-contents)
+- [QuickStart](#quickstart)
+- [The Page Object Model design pattern](#the-page-object-model-design-pattern)
+- [Instantiation of the WebDriver](#instantiation-of-the-webdriver)
+- [Opening and closing the WebDriver](#opening-and-closing-the-webdriver)
+- [Geting and handling the Window](#geting-and-handling-the-window)
+- [Locating elements](#locating-elements)
+  * [NoSuchElementException](#nosuchelementexception)
+- [Interacting with elements](#interacting-with-elements)
+  * [Basic interactions](#basic-interactions)
+  * [Interacting with Dropdown elements](#interacting-with-dropdown-elements)
+  * [Advanced interactions](#advanced-interactions)
+  * [Writing text](#writing-text)
+  * [Interacting with JavaScript alerts](#interacting-with-javascript-alerts)
+  * [Interacting with FileUploads](#interacting-with-fileuploads)
+  * [Interacting with Modals](#interacting-with-modals)
+  * [Interacting with iframes](#interacting-with-iframes)
+- [Wait Strategies](#wait-strategies)
+  * [Implicit wait](#implicit-wait)
+  * [Explicit Waits](#explicit-waits)
+    + [With WebDriverWait class](#with-webdriverwait-class)
+    + [With FluentWait class](#with-fluentwait-class)
+- [Using JavaScript](#using-javascript)
+- [Navigation](#navigation)
+    + [Back, Forward, Refresh, Go to url](#back-forward-refresh-go-to-url)
+  * [Switch to window or tab](#switch-to-window-or-tab)
+- [Taking screenshots](#taking-screenshots)
+  * [General](#general)
+  * [After each failed test](#after-each-failed-test)
+- [Event Listeners](#event-listeners)
+- [Managing the browser](#managing-the-browser)
+- [Cookies](#cookies)
+- [Appendix A Example implementation of POM design pattern](#appendix-a-example-implementation-of-pom-design-pattern)
+- [Cool Sites](#cool-sites)
+- [Design patterns for Test Automation](#design-patterns-for-test-automation)
+
+# QuickStart
 * Download the ChromeDriver exec and unzip it inside the resourses directory.
 * Add the Maven [dependency](https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver) for Selenium Chrome Driver inside the ```pom.xml```.
 * Add the Maven [dependency](https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-support) for Selenium Support inside the ```pom.xml``` (Selenium Support offers classes such as ```Select``` which allows to select elements from dropdown menus, etc).
@@ -47,14 +51,14 @@ ChromeDriver 80.0.3987.106 was used (executable file inside the resources direct
 * Create an instance of the WebDriver interface through it's implementing classes (ChromeDriver, EdgeDriver, EventFiringWebDriver, FirefoxDriver, InternetExplorerDriver, OperaWebDriver,
          RemoteWebDriver, SafariDriver).
 
-## The Page Object Model design pattern
+# The Page Object Model design pattern
 In test automation projects there are typically two layers: the **framework** layer and the **test** layer. The framework layer is all the coding that's done under the covers of the application (all the interactions with the web browser). The test layer is the actual tests that are executed.
 
 The way the Page Object Model design pattern works is that for every page of the application, a new class is created in the framework section of the project. For every element of the page that we want to interact with we create a private instance variable of type ```By``` and we instantiate it according to the ```By``` method that we want to use. To interact with the element we declare public methods. If the interaction results in browsing to a different page, then the method return type should be of the same type of the class that represents that page.
 
 For an example implementation of the POM design pattern on a web site, please refer to the Appendix A.
 
-## Instantiation of the WebDriver
+# Instantiation of the WebDriver
 The instantiation happens in two steps:
 - Setting the system property for the driver to look at the driver exe.
 - Instantiating the WebDriver interface through it's implementing classes, here ChromeDriver class (other classes are EdgeDriver, EventFiringWebDriver, FirefoxDriver, InternetExplorerDriver, OperaWebDriver, RemoteWebDriver, SafariDriver).
@@ -62,7 +66,7 @@ The instantiation happens in two steps:
 System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
 WebDriver driver = new ChromeDriver();
 ```
-## Opening and closing the WebDriver
+# Opening and closing the WebDriver
 Opening and closing the browser is easy through the following methods.
 
 Method | Return type | Description
@@ -71,7 +75,7 @@ Method | Return type | Description
 ```close()``` | ```void``` | Closes the browser **but not*** the session
 ```quit()``` | ```void``` | Closes the browser **and** the session
 
-## Geting and handling the Window
+# Geting and handling the Window
 Since we open the browser, we can get info about the window, or set it's dimensions:
 
 ```java
@@ -89,7 +93,7 @@ Method | Return type | Description
 ```getPosition()``` | ```Point``` | Gets the position of the window
 
 
-## Locating elements
+# Locating elements
 Since the WebDriver is instantiated, there are two methods for finding elements inside the web page:
 
 Method | Return type
@@ -108,11 +112,11 @@ The ```By``` class offers various ways to search for the element such as:
 
 **Notice that** the above two methods return the child element(s) of the parent element. So if the parent element is the driver, the methods will search all the DOM. If the parent element is another element, the methods will search only inside this element.
 
-### NoSuchElementException
+## NoSuchElementException
 While searching for an element, there is always the possibility that this element does not exist. In such case the exception ```org.openqa.selenium.NoSuchElementException``` is thrown.
 
-## Interacting with elements
-### Basic interactions
+# Interacting with elements
+## Basic interactions
 Since we've got a WebElement, there are various methods to interact with it:
 
 Method | Return type | Description
@@ -130,7 +134,7 @@ Method | Return type | Description
 ```isEnabled()``` | ```boolean``` | Returns ```true``` if the element is enabled.
 ```isSelected()``` | ```boolean``` | Returns ```true``` if the element is selected.
 
-### Interacting with Dropdown elements
+## Interacting with Dropdown elements
 Selenium has a special class ```Select``` that makes it posible to interact with dropdowns. This class is included inside the package ```org.openqa.selenium.support.ui``` (Selenium Support dependency).
 
 As long as the WebElement representing a dropdown is found, we can create a ```Select``` object that will actually hold this dropdown element:
@@ -157,7 +161,7 @@ Method | Return type | Description
  | |
 ```isMultiple()``` | ```boolean``` |
 
-### Advanced interactions
+## Advanced interactions
 To interact with elements with advanced interactions such as hovering, drag and drop, double clicking, click and wait, etc, Selenium provides the **```Actions```** class. The Actions class is instantiated by passing the WebDriver.
 ```java
 Actions actions = new Actions(driver);
@@ -203,7 +207,7 @@ Method | Return type | Description
 ```perform()``` | ```void``` |
 ```build()``` | ```Action``` |
 
-### Writing text
+## Writing text
 Both `WebElement` class and `Actions` class offer the `sendKeys(CharSequence ... charSequence)` method for writing text in input fields. This method ofcourse can accept any `String`, but Selenium WebDriver comes with a special [`enum Keys`](https://www.selenium.dev/selenium/docs/api/java/org/openqa/selenium/Keys.html) which offers some out-of-the-box functionality for pressing keys such as ALT, BACK_SPACE, SHIFT, F1, NUMPAD0, etc. The `Keys enum` implements `java.lang.CharSequence` so it can be passed as an argument in the `sendKeys()` method.
 
 A very usefull feature of `Keys enum` is the method `chord(CharSequence ... charSequence)` with a return type of `String` which allows to combine keys, like SHIFT+p, etc. Some valid examples:
@@ -228,7 +232,7 @@ The above will type 'P some string'.
 
 The above will type 'P some strinG'.
 
-### Interacting with JavaScript alerts
+## Interacting with JavaScript alerts
 JavaScipt alerts are not part of the DOM, and this means that they cannot be located directly using the `By` class. To locate and interact with JS alerts we use the `switchTo()` method of the `WebDriver` which returns a `TargetLocator`. On the `TargetLocator` object we use the `alert()` method which returns an `Alert` object.
 ```java
 Alert alert = this.driver.switchTo().alert();
@@ -242,18 +246,18 @@ Method | Return type | Description
 `sendKeys(String s)` | `void` | Writes text to the input field of the alert.
 `getText()` | `String` | Returns the text of the alert.
 
-### Interacting with FileUploads
+## Interacting with FileUploads
 File upload input elements open a window to choose a file to e uploaded. This window is part of the OS, and not of the DOM, so it is impossible to interact with it. To solve this issue, we skip this step by sending directy the absolute path of the file we want to upload to the input field.
 ```java
 driver.findElement(inputField).sendKeys("abslute/path/of/file/myfile.txt");
 ```
 
-### Interacting with Modals
+## Interacting with Modals
 Unlike alerts, modals are part of the DOM, and this means that as long as a modal is visible, it is possible to locate it and interact with it.
 
 **Notice that** when a modal is visible, it is impossible to interact with anything on the page besides the modal. Attempting to do so will throw an exception.
 
-### Interacting with iframes
+## Interacting with iframes
 Iframes are pages inside a page, so in order to interact with an iframe the WebDriver must first switch to this page. As long as this happens, we can interact with the iframe just like any other page. To switch to an iframe and switch back to parent Selenium WebDriver offers the following methods:
 
 Method | Return type | Description
@@ -267,10 +271,10 @@ Method | Return type | Description
 
 **Good practice tip 2:** Consider returning a new Page class for each nested iframe (according to the POM design pattern).
 
-## Wait Strategies
+# Wait Strategies
 When it is about interacting with elements that may delay to load, or load dynamically, Selenium WebDriver offers three wait strategies, a) implicit wait, b) explicit wait with `WebDriverWait` class and c) explicit wait with `FluentWait` class.
 
-### Implicit wait
+## Implicit wait
 Implicit wait is applied to all the elements of the page, in every interaction. Every time the WebDriver needs to interract with any element and the element is not available, then the driver will wait for up to a specified time. If the specified time passes, then an exception is thrown. It is recommended to use when the elements are located with the time frame specified in implicit wait.
 
 Examples:
@@ -283,10 +287,10 @@ driver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);
 // Will wait for up to 5 seconds for asynchronous scripts
 ```
 
-### Explicit Waits
+## Explicit Waits
 Explicit waits offer more flexibility as they are applied to specific elements and are recommended to use when the elements are taking long time to load and we also want to verify a property of the element (e.g. it's visibility).
 
-#### With WebDriverWait class
+### With WebDriverWait class
 With the WebDriverWait class it is possible to specify the wait timeout and the expected conditions that should be met in order for the WebDriver to proceed with an element. For example, to wait for 5 seconds until an element disappears (if the element disappears within 5 seconds the WebDriver proceeds, or else an exception is thrown).
 
 Example:
@@ -297,7 +301,7 @@ WebDriverWait wait = new WebDriverWait(driver, 5);
 
 wait.until(ExpectedConditions.invisibilityOf(webElement));
 ```
-#### With FluentWait class
+### With FluentWait class
 It is even more flexible than the WebDriverWait class, allowing also to specify how ofter the WebDriver should try to poll for the element, and what exceptions should ignore during this.
 
 Example:
@@ -311,7 +315,7 @@ FluentWait wait = new FluentWait(driver)
 wait.until(ExpectedConditions.invisibilityOf(webElement));
 ```
 
-## Using JavaScript
+# Using JavaScript
 Selenium WebDriver provides a way to allow the execution of JavaScript in the browser. To do this, simply cast the `WebDriver` to a `JavascriptExecutor` class and use the method `executeScript(String script, Object... objects)` or the method `executeAsyncScript(String script, Object... objects)`.
 
 Assuming that there is an element with id 'dropdown', then the following two examples are equivalent:
@@ -326,7 +330,7 @@ String script = "arguments[0].setAttribute('multiple', '')";
 // With arguments[0] we refer to the 1st Object that is passed as an argument inside the executeScript() method.
 ```
 
-## Navigation
+# Navigation
 
 ### Back, Forward, Refresh, Go to url
 Through `WebDriver` class we can access the `Navigation` class with `driver.navigate()` which offers the following methods for navigating back and forth or to another location:
@@ -341,7 +345,7 @@ Method | Return type | Description
 
 **Notice that** `driver.get(String url)` and `driver.navigate().to(String url)` are different in that the `get()` method waits for the page to load while the `to()` method does not.
 
-### Switch to window or tab
+## Switch to window or tab
 Selenium WebDriver provides the already open windows or tabs in a Set of Strings:
 
 ```java
@@ -357,8 +361,8 @@ driver.switchTo().window(window);
 But since the window string is non deterministic, how do we know in which window to switch to? Literally, we don't. The only option is that we iterate through the entire `Set<String> windows` and for every `window` we will switch the driver to this window. The `driver.getTitle()` method in every switch will return the name of the current window. Thus, the breaking condition is that the current window value must be equal with a predefined value (`tabTitle.equals(this.driver.getTitle())`).
 
 
-## Taking screenshots
-### General
+# Taking screenshots
+## General
 To take screenshots Selenium offers the interface `TakeScreenshot` in which the `WebDriver` object need to be cast to. After casting, the "camera" object has only one method `getScreenshotAs(OutputType<X> outputType)`. For example:
 
 ```java
@@ -372,7 +376,7 @@ Files.move(screenshot, new File("resources/screenshots/" + result.getInstanceNam
 ```
 The above line will move the file to the directory `resources/screenshots/` and also rename it to be like `package.TestClass.TestMethod.png`.
 
-### After each failed test
+## After each failed test
 To take a screenshot after each failed test, we can use the `org.testng.ITestResult` interface and pass it as a parameter in a `@AfterMethod`. With the result object we can check if the `result.getStatus()` is equal to `ITestResult.FAILURE` and if this is true, to take a screenshot. For example:
 
 ```java
@@ -390,7 +394,7 @@ public void takeScreenshot(ITestResult result) {
 }
 ```
 
-## Event Listeners
+# Event Listeners
 Selenium offers an interface called `WebDriverEventListener`, which provides methods that will listen for Selenium events and allows us to add additional functionality when those events occur. To implement this interface simply we make a class that implements it, like:
 ```java
 public class EventReporter implements WebDriverEventListener {
@@ -423,14 +427,14 @@ driver.register(new EventReporter());
 ```
 In this way, the `EventFiringWebDriver` will trigger events and notify (invoke methods of) the `EventReporter` class.
 
-## Managing the browser
+# Managing the browser
 Selenium offers the `ChromeOptions` class that allows us to make changes to the browser instance that is launched. For example:
 * We can `addArguments(String arg)` ~~such as `disable-infobars` if we want the info bar not to be visible~~ (disabled by GoogleChrome), and other [arguments](https://peter.sh/experiments/chromium-command-line-switches/)
 * We can `setHeadless(Boolean boolean)` if we want our tests to run in the background without opening an instance of the browser (this offers faster execution).
 * We can `setBinary(File file)` of the browser if we want to use a different binary
 * and many more...
 
-## Cookies
+# Cookies
 Selenium offers the `Cookie` class if we want to build a cookie. To send/get a cookie we can use the `Options` class (`driver.manage()`) and from `Options` class we have many options:
 
 Method | Return type | Description
@@ -454,7 +458,7 @@ Cookie cookie new Cookie.Builder(String name, String value)
 ```
 
 
-## Appendix A Example implementation of POM design pattern
+# Appendix A Example implementation of POM design pattern
 
 The HomePage class
 
@@ -532,14 +536,14 @@ public class SecureAreaPage {
     }
 }
 ```
-## Cool Sites
+# Cool Sites
 [Test Automation University](https://testautomationu.applitools.com/) - Free Test Automation courses
 
 [The Internet](https://the-internet.herokuapp.com/) - A website with all possible web elements for UI testing.
 
 [Formy](https://formy-project.herokuapp.com/) - Another websote for UI Testing with web elements especially used in forms.
 
-## Design patterns
+# Design patterns for Test Automation
 Below are listed some design patterns that are especially beneficial for test automation projects:
 - Page Object Model
 - Screenplay
