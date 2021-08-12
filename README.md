@@ -44,6 +44,9 @@ ChromeDriver 92.0.4515.107 was used (executable file inside the resources direct
 - [Appendix A Example implementation of POM design pattern](#appendix-a-example-implementation-of-pom-design-pattern)
 - [Cool Sites](#cool-sites)
 - [Design patterns for Test Automation](#design-patterns-for-test-automation)
+- [Troubleshooting](#Troubleshooting)
+  * [Mac OS](#MacOS)
+    * [Error: “chromedriver” cannot be opened because the developer cannot be verified.](#error-chromedriver-cannot-be-opened-because-the-developer-cannot-be-verified)
 
 # QuickStart
 * Download the ChromeDriver exec and unzip it inside the resourses directory.
@@ -554,3 +557,30 @@ Below are listed some design patterns that are especially beneficial for test au
 - Singleton
 - Factory
 Facade
+
+# Troubleshooting
+## MacOS
+### Error: “chromedriver” cannot be opened because the developer cannot be verified.
+
+1. Open terminal
+2. Navigate to path where your chromedriver file is located
+3. Execute any one of the below commands
+
+**Command1:** `xattr -d com.apple.quarantine <name-of-executable>`
+
+Example
+
+```bash
+/usr/local/Caskroom/chromedriver 
+$ xattr -d com.apple.quarantine chromedriver
+``` 
+(or)
+
+**Command2:** `spctl --add --label 'Approved' <name-of-executable>`
+
+>**Note:** This will work only with the file(s) where the above command is executed. If a new 
+>chromedriver is downloaded then the command has to be executed again on the newly downloaded file
+
+Sources:
+- [StackOverflow](https://stackoverflow.com/questions/60362018/macos-catalinav-10-15-3-error-chromedriver-cannot-be-opened-because-the-de)
+- [Upgrading to Catalina](https://docwhat.org/upgrading-to-catalina)
