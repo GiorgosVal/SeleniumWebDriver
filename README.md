@@ -451,7 +451,9 @@ In this way, the `EventFiringWebDriver` will trigger events and notify (invoke m
 # Managing the browser
 Selenium offers the `ChromeOptions` class that allows us to make changes to the browser instance that is launched. For example:
 * We can `addArguments(String arg)` ~~such as `disable-infobars` if we want the info bar not to be visible~~ (disabled by GoogleChrome), and other [arguments](https://peter.sh/experiments/chromium-command-line-switches/)
-* We can `setHeadless(Boolean boolean)` if we want our tests to run in the background without opening an instance of the browser (this offers faster execution).
+* We can `setHeadless(Boolean boolean)` if we want our tests to run in the background without 
+opening an instance of the browser (this offers faster execution). **Notice that** the screenshot functionality
+of `TakesScreenshot` will be functional, regardless of the headless mode!
 * We can `setBinary(File file)` of the browser if we want to use a different binary
 * and many more...
 
