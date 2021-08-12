@@ -17,6 +17,8 @@ ChromeDriver 92.0.4515.107 was used (executable file inside the resources direct
 - [Geting and handling the Window](#geting-and-handling-the-window)
 - [Locating elements](#locating-elements)
   * [NoSuchElementException](#nosuchelementexception)
+- [Getting information of elements](#getting-information-of-elements)
+  * [Broken Images](#broken-images)
 - [Interacting with elements](#interacting-with-elements)
   * [Basic interactions](#basic-interactions)
   * [Interacting with Dropdown elements](#interacting-with-dropdown-elements)
@@ -77,8 +79,8 @@ Opening and closing the browser is easy through the following methods.
 Method | Return type | Description
 ------ | ----------- | -----------
 ```get(String url)``` | ```void``` | Opens the browser to the specified url
-```close()``` | ```void``` | Closes the browser **but not*** the session
-```quit()``` | ```void``` | Closes the browser **and** the session
+```close()``` | ```void``` | Closes the window **but not necessarily** the session
+```quit()``` | ```void``` | Closes all windows **and** the session
 
 # Geting and handling the Window
 Since we open the browser, we can get info about the window, or set it's dimensions:
@@ -116,6 +118,20 @@ The ```By``` class offers various ways to search for the element such as:
 * ```By.partialLinkText(String partialLinkText)```
 
 **Notice that** the above two methods return the child element(s) of the parent element. So if the parent element is the driver, the methods will search all the DOM. If the parent element is another element, the methods will search only inside this element.
+
+# Getting information of elements
+## Broken Images
+Assuming that we want to check if an image is broken (not loaded). One convenient way is to check the
+`naturalWidth` attribute of that image:
+```java
+private List<WebElement> images = this.driver.findElement(imageContainer).findElements(imagesLocator);
+int brokenImagesCounter = 0;
+for (WebElement image : images) {
+  if (image.getAttribute("naturalWidth").equals("0")) {
+    brokenImagesCounter++;
+  }
+}
+```
 
 ## NoSuchElementException
 While searching for an element, there is always the possibility that this element does not exist. In such case the exception ```org.openqa.selenium.NoSuchElementException``` is thrown.

@@ -85,6 +85,11 @@ public class HomePage {
         return new MultipleWindowsPage(this.driver);
     }
 
+    public BrokenImages clickBrokenImages() {
+        clickLink("Broken Images");
+        return new BrokenImages(this.driver);
+    }
+
     private void clickLink(String linkText) {
         this.driver.findElement(By.linkText(linkText)).click();
     }
