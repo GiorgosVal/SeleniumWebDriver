@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage {
 
@@ -88,6 +89,11 @@ public class HomePage {
     public BrokenImages clickBrokenImages() {
         clickLink("Broken Images");
         return new BrokenImages(this.driver);
+    }
+
+    public EntryAd clickEntryAdd() {
+        clickLink("Entry Ad");
+        return new EntryAd(this.driver);
     }
 
     private void clickLink(String linkText) {
