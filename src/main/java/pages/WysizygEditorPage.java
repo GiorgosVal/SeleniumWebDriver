@@ -8,7 +8,8 @@ public class WysizygEditorPage {
     private WebDriver driver;
     private String editorIframeId = "mce_0_ifr";
     private By textArea = By.id("tinymce");
-    private By descreaseIndentButton = By.cssSelector("#mceu_12 button");
+    //private By descreaseIndentButton = By.cssSelector("#mceu_12 button");
+    private By descreaseIndentButton = By.xpath("//button[contains(@title, 'Increase indent')]");
 
 
     public WysizygEditorPage(WebDriver driver) {
@@ -34,7 +35,7 @@ public class WysizygEditorPage {
         return text;
     }
 
-    public void decreaseIndentation() {
+    public void increaseIndentation() {
         this.driver.findElement(descreaseIndentButton).click();
     }
 

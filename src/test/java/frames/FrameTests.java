@@ -17,7 +17,7 @@ public class FrameTests extends BaseTests {
         String text2 = "world";
 
         wysizygEditorPage.setTextArea(text1);
-        wysizygEditorPage.decreaseIndentation();
+        wysizygEditorPage.increaseIndentation();
         wysizygEditorPage.setTextArea(text2);
 
         assertEquals(wysizygEditorPage.getTextFromEditor(), text1 + text2, "Text from editor is incorrect");

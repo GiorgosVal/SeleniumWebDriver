@@ -2,7 +2,9 @@
 # About
 This repo was created during the [course](https://testautomationu.applitools.com/selenium-webdriver-tutorial-java/) of [Test Automation University](https://testautomationu.applitools.com/) about the Selenium Web Driver and it is used to note the very first steps for using this framework.
 
-ChromeDriver 80.0.3987.106 was used (executable file inside the resources directory). To find out which version should be used a) check the current version of Google Chrome b) download the according executable file from [ChromeDriver downloads](https://chromedriver.chromium.org/downloads).
+ChromeDriver 92.0.4515.107 was used (executable file inside the resources directory). To find out which version should be used:
+1. check the current version of Google Chrome
+2. download the according executable file from [ChromeDriver downloads](https://chromedriver.chromium.org/downloads).
 
 # Table of Contents
 
@@ -15,6 +17,8 @@ ChromeDriver 80.0.3987.106 was used (executable file inside the resources direct
 - [Geting and handling the Window](#geting-and-handling-the-window)
 - [Locating elements](#locating-elements)
   * [NoSuchElementException](#nosuchelementexception)
+- [Getting information of elements](#getting-information-of-elements)
+  * [Broken Images](#broken-images)
 - [Interacting with elements](#interacting-with-elements)
   * [Basic interactions](#basic-interactions)
   * [Interacting with Dropdown elements](#interacting-with-dropdown-elements)
@@ -42,6 +46,9 @@ ChromeDriver 80.0.3987.106 was used (executable file inside the resources direct
 - [Appendix A Example implementation of POM design pattern](#appendix-a-example-implementation-of-pom-design-pattern)
 - [Cool Sites](#cool-sites)
 - [Design patterns for Test Automation](#design-patterns-for-test-automation)
+- [Troubleshooting](#Troubleshooting)
+  * [Mac OS](#MacOS)
+    * [Error: “chromedriver” cannot be opened because the developer cannot be verified.](#error-chromedriver-cannot-be-opened-because-the-developer-cannot-be-verified)
 
 # QuickStart
 * Download the ChromeDriver exec and unzip it inside the resourses directory.
@@ -72,8 +79,8 @@ Opening and closing the browser is easy through the following methods.
 Method | Return type | Description
 ------ | ----------- | -----------
 ```get(String url)``` | ```void``` | Opens the browser to the specified url
-```close()``` | ```void``` | Closes the browser **but not*** the session
-```quit()``` | ```void``` | Closes the browser **and** the session
+```close()``` | ```void``` | Closes the window **but not necessarily** the session
+```quit()``` | ```void``` | Closes all windows **and** the session
 
 # Geting and handling the Window
 Since we open the browser, we can get info about the window, or set it's dimensions:
@@ -111,6 +118,20 @@ The ```By``` class offers various ways to search for the element such as:
 * ```By.partialLinkText(String partialLinkText)```
 
 **Notice that** the above two methods return the child element(s) of the parent element. So if the parent element is the driver, the methods will search all the DOM. If the parent element is another element, the methods will search only inside this element.
+
+# Getting information of elements
+## Broken Images
+Assuming that we want to check if an image is broken (not loaded). One convenient way is to check the
+`naturalWidth` attribute of that image:
+```java
+private List<WebElement> images = this.driver.findElement(imageContainer).findElements(imagesLocator);
+int brokenImagesCounter = 0;
+for (WebElement image : images) {
+  if (image.getAttribute("naturalWidth").equals("0")) {
+    brokenImagesCounter++;
+  }
+}
+```
 
 ## NoSuchElementException
 While searching for an element, there is always the possibility that this element does not exist. In such case the exception ```org.openqa.selenium.NoSuchElementException``` is thrown.
@@ -430,7 +451,9 @@ In this way, the `EventFiringWebDriver` will trigger events and notify (invoke m
 # Managing the browser
 Selenium offers the `ChromeOptions` class that allows us to make changes to the browser instance that is launched. For example:
 * We can `addArguments(String arg)` ~~such as `disable-infobars` if we want the info bar not to be visible~~ (disabled by GoogleChrome), and other [arguments](https://peter.sh/experiments/chromium-command-line-switches/)
-* We can `setHeadless(Boolean boolean)` if we want our tests to run in the background without opening an instance of the browser (this offers faster execution).
+* We can `setHeadless(Boolean boolean)` if we want our tests to run in the background without 
+opening an instance of the browser (this offers faster execution). **Notice that** the screenshot functionality
+of `TakesScreenshot` will be functional, regardless of the headless mode!
 * We can `setBinary(File file)` of the browser if we want to use a different binary
 * and many more...
 
@@ -552,3 +575,30 @@ Below are listed some design patterns that are especially beneficial for test au
 - Singleton
 - Factory
 Facade
+
+# Troubleshooting
+## MacOS
+### Error: “chromedriver” cannot be opened because the developer cannot be verified.
+
+1. Open terminal
+2. Navigate to path where your chromedriver file is located
+3. Execute any one of the below commands
+
+**Command1:** `xattr -d com.apple.quarantine <name-of-executable>`
+
+Example
+
+```bash
+/usr/local/Caskroom/chromedriver 
+$ xattr -d com.apple.quarantine chromedriver
+``` 
+(or)
+
+**Command2:** `spctl --add --label 'Approved' <name-of-executable>`
+
+>**Note:** This will work only with the file(s) where the above command is executed. If a new 
+>chromedriver is downloaded then the command has to be executed again on the newly downloaded file
+
+Sources:
+- [StackOverflow](https://stackoverflow.com/questions/60362018/macos-catalinav-10-15-3-error-chromedriver-cannot-be-opened-because-the-de)
+- [Upgrading to Catalina](https://docwhat.org/upgrading-to-catalina)
