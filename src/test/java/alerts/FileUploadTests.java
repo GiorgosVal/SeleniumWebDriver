@@ -12,8 +12,8 @@ public class FileUploadTests extends BaseTests {
     @Test
     public void testFileUpload() {
         FileUploadPage fileUploadPage = homePage.clickFileUpload();
-        fileUploadPage.uploadFile("/home/val/IdeaProjects/test_automation_university/selenium_webdriver/resources/chromedriver");
-        assertEquals(fileUploadPage.getUploadedFiles(), "chromedriver", "Incorrect uploaded file");
+        fileUploadPage.uploadFile(System.getProperty("user.dir") + "/resources/testFile.txt");
+        assertEquals(fileUploadPage.getUploadedFiles(), "testFile.txt", "Incorrect uploaded file");
     }
 
 }
