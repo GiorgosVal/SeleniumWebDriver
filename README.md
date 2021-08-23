@@ -49,6 +49,7 @@ ChromeDriver 92.0.4515.107 was used (executable file inside the resources direct
 - [Troubleshooting](#Troubleshooting)
   * [Mac OS](#MacOS)
     * [Error: “chromedriver” cannot be opened because the developer cannot be verified.](#error-chromedriver-cannot-be-opened-because-the-developer-cannot-be-verified)
+    * [The path to the chromedriver executable must be set by the `webdriver.chrome.driver` system property error](#the-path-to-the-chromedriver-executable-must-be-set-by-the-webdriverchromedriver-system-property-error)
 
 # QuickStart
 * Download the ChromeDriver exec and unzip it inside the resourses directory.
