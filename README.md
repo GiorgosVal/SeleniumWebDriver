@@ -602,3 +602,15 @@ $ xattr -d com.apple.quarantine chromedriver
 Sources:
 - [StackOverflow](https://stackoverflow.com/questions/60362018/macos-catalinav-10-15-3-error-chromedriver-cannot-be-opened-because-the-de)
 - [Upgrading to Catalina](https://docwhat.org/upgrading-to-catalina)
+
+### The path to the chromedriver executable must be set by the `webdriver.chrome.driver` system property error 
+If you face this error, check if one of these conditions is met:
+* The chromedriver binary is in the system path (check it like `$ which chromedriver`). If no, install it like:
+    * Mac: `brew install --cask chromedriver`
+    * Debian Linux: `sudo apt-get install chromium-driver`
+    * Windows: `choco install chromedriver`
+*The Selenium Server was started with `-Dwebdriver.chrome.driver=c:\path\to\your\chromedriver.exe`
+* You set somewhere in your code the property, like `System.setProperty("webdriver.chrome.driver", "resources/chromedriver");` (NOT PREFERRED)
+
+Sources:
+- [SeleniumHQ ChromeDriver documentation](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver)
